@@ -33,7 +33,15 @@ jobs:
 
     # Setup Source
       - name: Setup Source
-        run: mkdir docs && cp os-lecs.md docs/index.md && cp -r lec[1-9]* docs && cp course-intro.md docs/course-intro.md && cp -r oslabs docs && cp -r mindmap/* docs
+        run: mkdir docs && cp os-lecs.md docs/index.md && cp -r lec[1-9]* docs && cp course-intro.md docs/course-intro.md && cp -r oslabs docs && cp -r mindmap/* docs &&  cat os.mm.md mindmap/lec1/lec1.mm.md mindmap/lec1/p*.mm.md mindmap/lec2/lec2.mm.md mindmap/lec2/p*.mm.md > docs/oscourse.mm.md
+
+    # markmap
+     - name: Convert Markdown to HTML
+        run: |
+         
+          echo "<!DOCTYPE html><html><head><title>OS</title></head><body>" > docs/osmap.html
+          markmap docs/oscourse.mm.md >> docs/osmap.html
+          echo "</body></html>" >> docs/osmap.html
 
     # Marp    
       - name: Marp Build (docs folder)
@@ -44,13 +52,6 @@ jobs:
         env:
           MARP_USER: root:root
 
-    # markmap
-      - name: Convert Markdown to HTML
-        run: |
-          cat os.mm.md docs/lec1/lec1.mm.md docs/lec1/p*.mm.md docs/lec2/lec2.mm.md docs/lec2/p*.mm.md > docs/oscourse.mm.md
-          echo "<!DOCTYPE html><html><head><title>OS</title></head><body>" > docs/osmap.html
-          markmap oscourse.mm.md >> docs/osmap.html
-          echo "</body></html>" >> docs/osmap.html
 
       - name: Deploy production
         if: ${{ github.event_name == 'push' }}
