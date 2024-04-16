@@ -1,0 +1,89 @@
+    - 第一节 课程概述 & 教学安排
+      - [课程幻灯片列表](https://www.yuque.com/xyong-9fuoz/qczol5/ewvhdy3epbwbkn3n)
+      - 课程信息
+          - 主讲教师：向勇 陈渝 李国良 任炬
+          - 助教：饶淙元、田凯夫、闭浩扬、王拓为、苏明贤、黄旺、郝子胥
+      - 上课信息
+          - 上课时间地点
+          - 时间：星期一 第2大节 上午09:50-12:15 (1-16周) 
+          - 地点：六教6A209（任）六教6A211（李）六教6A213（陈）
+      - 预备知识
+          - 程序设计语言（汇编、C 和 Rust）
+          - 不是开发应用程序 :confounded:
+          - 而是开发系统程序 :smile:
+          - 数据结构
+          - 理解基本数据结构即可 :smile:
+          - 计算机组成原理
+          - 刘总/康总/陆总的 RISC-V 原理 :smile: :smile: :smile:
+          - Patterson 的 RISC-V 原理 :smile:
+          - 编译原理
+          - 没学过影响不大 :smile:
+          - 但还是要了解高级语言 <–>RISC-V 汇编语言 :smile:
+      - 课程参考与实践
+          - [课程幻灯片](https://www.yuque.com/xyong-9fuoz/qczol5/ewvhdy3epbwbkn3n)
+          - 参考书籍
+          - [Operating Systems: Three Easy Pieces](https://pages.cs.wisc.edu/~remzi/OSTEP/)
+          - [深入了解计算机系统](https://hansimov.gitbook.io/csapp/)
+          - [RISC-V Reader中文版](http://riscvbook.com/chinese/RISC-V-Reader-Chinese-v2p1.pdf)
+          - 课程实践
+          - [rCore Tutorial Book v3](https://learningos.github.io/rCore-Tutorial-Book-v3/)
+          - [代码仓库](https://github.com/rcore-os/rCore-Tutorial-v3)
+          - [API文档](https://github.com/rcore-os/rCore-Tutorial-v3#os-api-docs)
+      - 实验指导
+          - uCore Tutorial
+          - [实验代码](https://github.com/LearningOS/uCore-Tutorial-Code-2024S/)
+          - [实验文档](https://learningos.github.io/uCore-Tutorial-Guide-2024S/)
+          - [测试用例](https://github.com/LearningOS/uCore-Tutorial-Test-2024S/)
+          - rCore Tutorial
+          - [实验文档](https://learningos.github.io/rCore-Tutorial-Guide-2024S/)
+          - [API文档](https://github.com/LearningOS/rCore-Tutorial-Guide-2024S/#os-api-docs-of-rcore-tutorial-code-2022a)
+          - [实验代码](https://github.com/LearningOS/rCore-Tutorial-Code-2024S)
+          - [测试用例](https://github.com/LearningOS/rCore-Tutorial-Test-2024S)
+          - [uCore和rCore实验帮助](https://www.yuque.com/xyong-9fuoz/qczol5/lt5qafszpz62hob1?singleDoc)
+          - 讲解视频
+          - 部分内容将逐步更新
+      - OS 原理与设计思想
+          - 操作系统结构
+          - 中断及系统调用
+          - 内存管理
+          - 进程管理
+          - 处理机调度
+          - 同步互斥
+          - 文件系统
+          - I/O 子系统
+      - 作业与实验
+          - 平时作业
+          - 课后练习：包括问答题和编程题目，要求在deadline前提交
+          - 基础实验
+          - （必做）面向 RISC-V CPU 用 Rust/C 设计实现操作系统的功能
+          - （选做）难度和工作量比必做题目大的其它题目
+          - 课程设计（大实验）
+          - 用组件来组合操作系统内核
+          - 参加全国大学生OS比赛
+      - 基础实验详细内容
+          - 实验一：操作系统的基本支持
+          - 实验二：地址空间
+          - 实验三：进程管理与调度
+          - 实验四：文件系统与进程间通信
+          - 实验五：同步互斥
+      - 课程设计（大实验）
+          - 用组件来组合操作系统内核
+          - 组件化操作系统[ArceOS](http://arceos.org/overview.html)
+          - 操作系统功能和扩展
+          - 内核模块的完善和改进
+          - 内核可加载模块、微内核、在内核中引入异步编程
+          - 支持多种处理器架构和硬件平台
+          - GUI、驱动、文件系统、网络
+          - 往届同学的[课程设计成果](https://shimo.im/docs/QTPRT8h8jyGQCqkJ)
+      - 成绩评定
+          - 选择1
+          - 实验一~五必做题目：40%
+          - 期中考试：20%
+          - 期末考试：40%
+          - 加分：平时作业每做一次加1分，最高加5分
+          - 选择2
+          - 四周内完成实验一~五：40%
+          - 课程设计（即大实验）：60%
+      - 调查问卷
+          - [2024年春季学期操作系统课选课问卷](http://oscourse2019.mikecrm.com/TdGsawl)
+

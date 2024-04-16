@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://rcore-os.github.io/rCore-Tutorial-Book-v3/chapter1/4first-instruction-in-kernel2.html
+HostUrl=https://rcore-os.github.io/rCore-Tutorial-Book-v3/_images/load-into-qemu.png
