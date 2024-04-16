@@ -1,67 +1,36 @@
-# This is a basic workflow to help you get started with Actions
+name: Deploy Markmap to GitHub Pages
 
-name: CI
-
-# Controls when the action will run. Triggers the workflow on push events for the main branch
 on:
-  workflow_dispatch:
   push:
-    branches: [ main ]
-permissions:
-  contents: write
+    branches:
+      - main  # Set this to your default branch
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  build-and-deploy:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your action can access it
-      - uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-      # Setup Node.js environment
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+    # Setup Node.js environment
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
 
-      # Install markmap
-      - name: Install markmap
-        run: npm install -g markmap-cli
+    # Install markmap
+    - name: Install markmap
+      run: npm install -g markmap-cli
 
-      # Setup Source
-      - name: Setup Source
-        run: |
-          mkdir docs
-          cp os-lecs.md docs/index.md
-          cp -r lec[1-9]* docs
-          cp course-intro.md docs/course-intro.md
-          cp -r oslabs docs
-          cp -r mindmap/* docs
-          cat os.mm.md mindmap/lec1/lec1.mm.md mindmap/lec1/p*.mm.md mindmap/lec2/lec2.mm.md mindmap/lec2/p*.mm.md > docs/oscourse.mm.md
+    # Convert Markdown to HTML using markmap
+    - name: Convert Markdown to HTML
+      run: |
+        echo "<!DOCTYPE html><html><head><title>My Mindmap</title></head><body>" > index.html
+        markmap test.md >> index.html
+        echo "</body></html>" >> index.html
 
-      # Convert Markdown to HTML using markmap
-      - name: Convert Markdown to HTML
-        run: |
-          echo "<!DOCTYPE html><html><head><title>OS</title></head><body>" > docs/osmap.html
-          markmap docs/oscourse.mm.md >> docs/osmap.html
-          echo "</body></html>" >> docs/osmap.html
-
-      # Marp build process
-      - name: Marp Build (docs folder)
-        uses: docker://marpteam/marp-cli:v1.7.0
-        with:
-          args: --html -I docs/ -o docs/
-        env:
-          MARP_USER: root:root
-
-      # Deploy to GitHub Pages if on push event
-      - name: Deploy production
-        if: github.event_name == 'push'
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GH_PAGES_TOKEN }}
-          publish_dir: ./docs/  # The directory that contains your built HTML file
+    # Deploy to GitHub Pages
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GH_PAGES_TOKEN }}
+        publish_dir: ./  # The directory that contains your built HTML file
