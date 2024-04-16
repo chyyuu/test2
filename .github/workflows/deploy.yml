@@ -33,7 +33,7 @@ jobs:
 
     # Setup Source
       - name: Setup Source
-        run: mkdir docs && cp os-lecs.md docs/index.md && cp -r lec[1-9]* docs && cp course-intro.md docs/course-intro.md && cp -r oslabs docs && cp -r mindmap docs
+        run: mkdir docs && cp os-lecs.md docs/index.md && cp -r lec[1-9]* docs && cp course-intro.md docs/course-intro.md && cp -r oslabs docs && cp -r mindmap/* docs
 
     # Marp    
       - name: Marp Build (docs folder)
