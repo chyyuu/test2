@@ -1,0 +1,36 @@
+name: Deploy Markmap to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Set this to your default branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    # Setup Node.js environment
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12'
+
+    # Install markmap
+    - name: Install markmap
+      run: npm install -g markmap-cli
+
+    # Convert Markdown to HTML using markmap
+    - name: Convert Markdown to HTML
+      run: |
+        echo "<!DOCTYPE html><html><head><title>My Mindmap</title></head><body>" > index.html
+        markmap test.md >> index.html
+        echo "</body></html>" >> index.html
+
+    # Deploy to GitHub Pages
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./  # The directory that contains your built HTML file
