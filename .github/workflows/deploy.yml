@@ -24,9 +24,7 @@ jobs:
     # Convert Markdown to HTML using markmap
     - name: Convert Markdown to HTML
       run: |
-        echo "<!DOCTYPE html><html><head><title>My Mindmap</title></head><body>" > index.html
-        markmap test.md >> index.html
-        echo "</body></html>" >> index.html
+        ./build.sh
 
     # Deploy to GitHub Pages
     - name: Deploy to GitHub Pages
