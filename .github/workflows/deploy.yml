@@ -61,7 +61,7 @@ jobs:
       # Deploy to GitHub Pages if on push event
       - name: Deploy production
         if: github.event_name == 'push'
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          branch: gh-pages
-          folder: ./docs/
+          github_token: ${{ secrets.GH_PAGES_TOKEN }}
+          publish_dir: ./docs/  # The directory that contains your built HTML file
