@@ -28,7 +28,9 @@
         - 简单结构 -- DOS
         - 单体分层结构（宏内核） -- UNIX
         - 微内核 -- Mach、seL4、MINIX
-        - 外核 -- exokernel from MIT，演进为虚拟机管理器 VMM or Hypervisor  - 第一节 课程概述 & 教学安排
+        - 外核 -- exokernel from MIT，演进为虚拟机管理器 VMM or Hypervisor  
+
+- 第一节 课程概述 & 教学安排
     - [课程幻灯片列表](https://www.yuque.com/xyong-9fuoz/qczol5/ewvhdy3epbwbkn3n)
     - 课程信息
         - 主讲教师：向勇 陈渝 李国良 任炬
