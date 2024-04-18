@@ -25,3 +25,4 @@
         - 单体分层结构（宏内核） -- UNIX
         - 微内核 -- Mach、seL4、MINIX
         - 外核 -- exokernel from MIT，演进为虚拟机管理器 VMM or Hypervisor  
+
