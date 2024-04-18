@@ -1,0 +1,27 @@
+- 第一讲总结
+  	- 知识点
+  		- 操作系统定义
+    		- 操作系统是**管理硬件资源**、控制程序运行、改善人机界面和**为应用软件提供支持**的一种系统**软件**
+  		- 内核基本抽象
+    		- 进程 -- CPU
+    		- 文件 -- 存储(I/O)设备
+    		- 地址空间 -- 内存(+存储)
+  		- 内核特征
+    		- 并发
+    		- 共享
+    		- 虚拟
+    		- 异步 
+  		- 内核演进
+    		- 批处理系统
+    		- 多道程序系统
+    		- 分时系统
+        		- CTSS
+        		- Multics
+        		- UNIX + C -- Ken Thompson + Dennis Ritchie
+        		- Linux	使用最广泛的OS
+        		- Android with Linux kernel
+      - 内核架构
+        - 简单结构 -- DOS
+        - 单体分层结构（宏内核） -- UNIX
+        - 微内核 -- Mach、seL4、MINIX
+        - 外核 -- exokernel from MIT，演进为虚拟机管理器 VMM or Hypervisor  
