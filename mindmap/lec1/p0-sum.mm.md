@@ -25,4 +25,11 @@
         - 单体分层结构（宏内核） -- UNIX
         - 微内核 -- Mach、seL4、MINIX
         - 外核 -- exokernel from MIT，演进为虚拟机管理器 VMM or Hypervisor  
+      - 实践能力
+        - 会使用基本Linux命令: ls、rm、gcc、gdb、make、git、ps、cat
+        - 了解Linux基本系统调用：fork、exit、wait、kill、getpid、sleep、exec、sbrk、open、write、read、close、dup、pipe、chdir、mkdir、mknod、fstat、stat、link、unlink
+        - 理解、编译、运行Linux程序：fork.c、exec.c、forkexec.c等
+
+
+
 
