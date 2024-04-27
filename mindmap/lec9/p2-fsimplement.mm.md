@@ -1,0 +1,93 @@
+### 第二节 文件系统的设计与实现
+- 文件系统的总体结构
+  - 文件系统在内核架构中的位置
+    - 向下对接存储设备驱动程序
+    - 向上提供文件系统接口给进程管理和内存管理
+  - 文件系统在操作系统中的静态分层结构（自上而下）
+    - 文件相关的系统调用接口
+    - 进程管理/内存管理
+      - 文件描述符和打开文件描述符表
+      - 文件锁
+      - 虚存对应的文件
+    - 虚拟文件系统（VFS）
+      - 定义了一组所有文件系统都支持的数据结构和标准接口
+      - 虚拟文件系统统一不同文件系统的访问接口
+      - 功能：提供相同的文件和文件系统接口，管理所有文件和文件系统关联的数据结构，高效查询例程，与特定文件系统模块的交互 
+    - 具体文件系统（如Fat32、NTFS、ext4）
+    - 存储数据缓冲区
+    - 存储设备驱动程序
+  - 文件系统在操作系统中的动态分层视图（通过write函数自上而下分析）
+    - 用户空间的应用程序：write()
+    - 用户空间库中的系统调用：sys_write()
+    - 内核空间的进程控制块：sys_write()
+      - 根据文件描述符--fd，查找打开文件描述发表--fdtable，得到对应的文件控制块--inode
+    - 内核空间的虚拟文件系统：sys_write()
+      - 根据文件控制块--inode，查找对应的具体文件系统--xxFS，发起对文件的写操作。
+    - 内核空间的具体文件系统：xxFS_write()
+      - 定位到文件数据对应的存储设备数据块；
+      - 发起存储设备数据块写操作。
+    - 内核空间的存储设备驱动程序：xxDISKdrv_write()
+  - 文件系统分区
+      - 磁盘可划分为一个或多个分区
+      - 每个分区有一个独立的文件系统
+- 文件系统的具体设计
+  - 文件系统基本数据结构
+    - 文件系统控制块 (`superblock`)
+      - 文件系统详细信息：块总量、空闲块数量等
+    - 文件控制块 (`index node，简称inode`)
+    - 文件数据块 (`data block，data node，简称dnode`)
+      - 目录文件的数据块：包含目录项 (`dir_entry`)
+    - bitmap块
+      - bitmap for inode集合
+      - bitmap for dnode集合
+  - 文件缓存
+    - 多种磁盘缓存位置
+    - 数据块缓存
+    - 虚拟页式存储与页缓存
+  - 文件分配
+    - 文件大小：大多数文件小，一些文件非常大
+    - 分配方式：连续、链式、索引
+  - 空闲空间管理
+    - 位图、链表、索引
+  - 文件访问过程示例
+    - 文件系统组织示例：superblock、inodes、dnodes、bitmaps
+      - 下面的例子中忽略了对superblock的修改，因为相关superblock的操作一般是在文件系统挂载或卸载时做的。
+    
+    - 打开已有文件&读操作过程：open("tmp/file"); read();read();read();
+      - 1: open("tmp/file") for reading;
+        - 1: inodes: read root DIR; 
+        - 2: dnodes: read root DIR; 
+        - 3: inodes: read tmp DIR;
+        - 4: dnodes: read tmp DIR;
+        - 5: inodes: read file metadata;
+      - 2: read();
+        - 6: inodes: read file metadata;
+        - 7: dnodes: read file contents; 
+        - 8: inodes: write file metadata(e.g. read time);
+      - 3: read();
+        - 9: inodes: read file metadata;
+        - 10: dnodes: read file contents; 
+        - 11: inodes: write file metadata(e.g. read time);
+      - 4: read();
+        - 12: inodes: read file metadata;
+        - 13: dnodes: read file contents; 
+        - 14: inodes: write file metadata(e.g. read time);
+    - 打开创建文件&写操作过程：open("tmp/file"); write();
+      - 1: open("tmp/file") for creating & writing;
+        - 1: inodes: read root DIR; 
+        - 2: dnodes: read root DIR; 
+        - 3: inodes: read tmp DIR;
+        - 4: dnodes: read tmp DIR;
+        - 5: bitmaps: read inode bitmap;
+        - 6: bitmaps: write inode bitmap;
+        - 7: inodes: write(create) file's inode;
+        - 8：dnodes：write tmp dir_entry；
+        - 9：inodes：write tmp's inode;
+      - 2: write(); //just one data block
+        - 10：inodes：read file's inode;
+        - 11: bitmaps：read data bitmap;
+        - 12：bitmaps：write data bitmap;
+        - 13：dnodes：write file contents;
+        - 14：inodes：write file's inode;
+
+
