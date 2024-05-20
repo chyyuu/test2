@@ -7,7 +7,7 @@ output_file="oscourse.mm.md"
 cat os.mm.md > "$output_file"
 
 # Loop through lecture numbers 1 to 7
-for i in {1..11}; do
+for i in {1..12}; do
     # Concatenate main lecture file first
     cat "mindmap/lec$i/lec$i.mm.md" >> "$output_file"
     
